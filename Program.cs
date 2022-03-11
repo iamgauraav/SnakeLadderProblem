@@ -4,9 +4,15 @@ namespace SnakeLadder
 {
     class Program
     {
+        public static void position()
+        {
+            int position = 0;
+            Console.WriteLine( "Player is at start position : " + position);
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to snake and ladder problem on master branch ");
+            Console.WriteLine("Sinlge player");
+            Program.position();
             Console.ReadLine();
         }
     }
