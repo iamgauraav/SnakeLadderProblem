@@ -2,7 +2,7 @@
 
 namespace SnakeLadder
 {/// <summary>
- /// UC4- Repeat till the player reaches the winning position 100.
+ /// UC5- Ensure the player gets to exact winning position 100.
 /// </summary>
 
     class Program
@@ -36,9 +36,19 @@ namespace SnakeLadder
                 //If else if selection statement
                 if (CheckOption == LADDER)
                 {
-                    position += CheckDie;
-                    Console.WriteLine("LADDER");
-                    Console.WriteLine("player current position : " + position);   
+                    if (position + CheckDie <= 100) //Checking if the dice goes above 100 than it come to 100 position
+                    {
+                        position += CheckDie;
+                        Console.WriteLine("LADDER");
+                        Console.WriteLine("player current position : " + position);
+                    }
+                    else
+                    {
+                        
+                        Console.WriteLine("LADDER");
+                        Console.WriteLine("player current position : " + position);
+                    }
+                    
                 }
                 else if (CheckOption == SNAKE)
                 {
