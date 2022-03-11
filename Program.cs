@@ -2,7 +2,7 @@
 
 namespace SnakeLadder
 {/// <summary>
- /// UC5- Ensure the player gets to exact winning position 100.
+ /// UC6- Report number of times dice was played to win and the position after every die rolled
 /// </summary>
 
     class Program
@@ -11,6 +11,7 @@ namespace SnakeLadder
         public const int LADDER = 1;
         public const int SNAKE = 2;
         public const int NO_PLAY = 3;
+
 
         //Method to return CheckDice
         public static int CheckDice()
@@ -23,16 +24,18 @@ namespace SnakeLadder
 
         public static void CheckOption()
         {
-            int position = 0;                       
+            int position = 0;
+            int numOfDiceRolles = 0;
             Random random = new Random();           //random method to generate random number
             int CheckOption = random.Next(1, 4);    //next method to generate value from 1 to 3
             int CheckDie = Program.CheckDice();     //Called the CheckDice in which position 1 to 6 is stored
+            
 
 
             //while loop
             while (position < 100)
             {
-                position++;
+                numOfDiceRolles++;                  //increase the no. of time dice rolls
                 //If else if selection statement
                 if (CheckOption == LADDER)
                 {
@@ -68,7 +71,7 @@ namespace SnakeLadder
                 {
                     Console.WriteLine("NO Play");
                 }
-
+                Console.WriteLine("Number of dice Rolles: " + numOfDiceRolles); //No. to times dice rolled
             }
 
         }
