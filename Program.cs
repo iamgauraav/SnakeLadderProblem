@@ -2,7 +2,7 @@
 
 namespace SnakeLadder
 {/// <summary>
- /// UC3-The Player then checks for a Option.They are No Play, Ladder or Snake
+ /// UC4- Repeat till the player reaches the winning position 100.
 /// </summary>
 
     class Program
@@ -28,23 +28,39 @@ namespace SnakeLadder
             int CheckOption = random.Next(1, 4);    //next method to generate value from 1 to 3
             int CheckDie = Program.CheckDice();     //Called the CheckDice in which position 1 to 6 is stored
 
-            //If else if selection statement
-            if (CheckOption == LADDER)
+
+            //while loop
+            while (position < 100)
             {
-                position += CheckDie;
-                Console.WriteLine("LADDER");
-                Console.WriteLine("player current position : " + position);
+                position++;
+                //If else if selection statement
+                if (CheckOption == LADDER)
+                {
+                    position += CheckDie;
+                    Console.WriteLine("LADDER");
+                    Console.WriteLine("player current position : " + position);   
+                }
+                else if (CheckOption == SNAKE)
+                {
+                    if (position - CheckDie <= 0)   //Checking if the dice goes below zero than come at starting position
+                    {
+                        position = 0;
+                    }
+                    else
+                    {
+                        position -= CheckDie;
+                        Console.WriteLine("SNAKE");
+                        Console.WriteLine("player current position : " + position);
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("NO Play");
+                }
+
             }
-            else if (CheckOption == SNAKE)
-            {
-                position -= CheckDie;
-                Console.WriteLine("SNAKE");
-                Console.WriteLine("player current position : " + position);
-            }
-            else
-            {
-                Console.WriteLine("NO Play");
-            }
+
         }
        
         static void Main(string[] args)
