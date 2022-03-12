@@ -23,9 +23,7 @@ namespace SnakeLadder
 
         public static void CheckOption()
         {
-            int position = 0;                       
-            Random random = new Random();           //random method to generate random number
-            int CheckOption = random.Next(1, 4);    //next method to generate value from 1 to 3
+            int position = 0;           
             int CheckDie = Program.CheckDice();     //Called the CheckDice in which position 1 to 6 is stored
 
 
@@ -33,42 +31,34 @@ namespace SnakeLadder
             while (position < 100)
             {
                 position++;
+                Random random = new Random();           //random method to generate random number
+                int CheckOption = random.Next(1, 4);    //next method to generate value from 1 to 3
+
                 //If else if selection statement
                 if (CheckOption == LADDER)
                 {
-                    if (position + CheckDie <= 100) //Checking if the dice goes above 100 than it come to 100 position
+                    if (position + CheckDie < 100) 
                     {
                         position += CheckDie;
                         Console.WriteLine("LADDER");
                         Console.WriteLine("player current position : " + position);
                     }
-                    else
-                    {
-                        
-                        Console.WriteLine("LADDER");
-                        Console.WriteLine("player current position : " + position);
-                    }
-                    
                 }
                 else if (CheckOption == SNAKE)
                 {
-                    if (position - CheckDie <= 0)   //Checking if the dice goes below zero than come at starting position
-                    {
-                        position = 0;
-                    }
-                    else
+                    if (position - CheckDie >= 0)
                     {
                         position -= CheckDie;
                         Console.WriteLine("SNAKE");
                         Console.WriteLine("player current position : " + position);
                     }
+                    else
+                    {
+                        position = 0;
+          
+                    }
                     
                 }
-                else
-                {
-                    Console.WriteLine("NO Play");
-                }
-
             }
 
         }
