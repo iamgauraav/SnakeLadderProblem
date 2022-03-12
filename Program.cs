@@ -1,115 +1,84 @@
 ﻿using System;
 
 namespace SnakeLadder
-{
+{/// <summary>
+ /// UC7-Game played with two player if player gets ladder then plays again and check which won.
+ /// </summary>
 
     class Program
     {
         //constant
         public const int LADDER = 1;
         public const int SNAKE = 2;
-        public const int NO_PLAY = 3;
-
-        //Method to return CheckDice
-        public static int CheckDice()
-        {
-            Random random = new Random();           //random method to generate random number
-            int CheckDice = random.Next(1, 7);      //next method to generate value from 1 to 6
-            Console.WriteLine("Dice number: " + CheckDice);
-            return CheckDice;
-        }
-
-        public static void CheckOption()
-        {
-            
-            Random random = new Random();           //random method to generate random number
-            int CheckOption = random.Next(1, 4);    //next method to generate value from 1 to 3
-            int CheckDie = Program.CheckDice();     //Called the CheckDice in which position 1 to 6 is stored
-            int currentPlayer = 1;
-            int posPlayer = 0;
-            int posplayer1 = 0;
-            int posplayer2 = 0;
-            int numOfDiceRolles = 0;
-
-            //while loop
-            while (posPlayer < 100 && posplayer2 <= 100)
-            {
-                numOfDiceRolles++;
-                //If else if selection statement
-
-                //re-initilize variable
-                if (currentPlayer == 1)
-                {
-                    posPlayer = posplayer1;
-                }
-                else
-                {
-                    posPlayer = posplayer2;
-                }
-
-                if (CheckOption == LADDER)
-                {
-                    if (posPlayer + CheckDie <= 100) //Checking if the dice goes above 100 than it come to 100 position
-                    {
-                        posPlayer += CheckDie;
-                        Console.WriteLine("LADDER");
-                        Console.WriteLine("player current position : " + posPlayer);
-                    }
-                    else
-                    {
-                        posPlayer++;
-                        Console.WriteLine("LADDER");
-                        Console.WriteLine("player current position : " + posPlayer);
-                    }
-
-                }
-                else if (CheckOption == SNAKE)
-                {
-                    if (posPlayer - CheckDie <= 0)   //Checking if the dice goes below zero than come at starting position
-                    {
-                        posPlayer = 0;
-                    }
-                    else
-                    {
-                        posPlayer -= CheckDie;
-                        Console.WriteLine("SNAKE");
-                        Console.WriteLine("player current position : " + posPlayer);
-                    }
-
-                }
-                else
-                {
-                    Console.WriteLine("NO Play");
-                    posPlayer++;
-                }
-                // re-assign return variable
-                if (currentPlayer == 1)
-                {
-                    posplayer1 = posPlayer;
-                }
-                else
-                {
-                    posplayer2 = posPlayer;
-                }
-
-                //Checking winner
-                if (posplayer1 == 100)
-                {
-                    Console.WriteLine("player one winner");
-                }
-                else if(posplayer2 == 100)
-                {
-                    Console.WriteLine("player two is winner");
-                }
-                Console.WriteLine("number of rolls die"+ numOfDiceRolles);
-
-            }
-
-        }
+        public const int NO_PLAY = 0;
 
         static void Main(string[] args)
         {
-            Program.CheckOption();
+            int positionOne = 0;
+            int positionTwo = 0;
+            int loopCount = 0;
+            int currentPlayer = 1;
+            int currentPlayerPos = 0;
+            Random random = new Random();
+
+            //While loop
+            while (positionOne < 100 && positionTwo < 100)
+            {
+                loopCount++;
+                //initilize loops variable
+                if (currentPlayer == 1)
+                {
+                    currentPlayerPos = positionOne;
+                }
+                else
+                {
+                    currentPlayerPos = positionTwo;
+                }
+
+                //in-play
+                int diceNum = random.Next(0, 7);    //O-initial number , 6-final number
+                int result = random.Next(0, 3);     //1-Ladder, 2-Snake , 0-No-play
+
+                if (result == LADDER)
+                {
+                    if (currentPlayerPos + diceNum <= 100)
+                    {
+                        currentPlayerPos += diceNum;
+                    }
+                }
+                else if (result == SNAKE)
+                {
+                    if (currentPlayerPos - diceNum >= 0)
+                    {
+                        currentPlayerPos -= diceNum;
+                    }
+                    else
+                    {
+                        currentPlayerPos = 0;
+                    }
+                }
+                // Re-assign the play result to player
+                if (currentPlayer == 1)
+                {
+                    positionOne = currentPlayerPos;
+                    currentPlayer = 2;
+                }
+                else
+                {
+                    positionTwo = currentPlayerPos;
+                    currentPlayer = 1;
+                }
+            }
+            //Checking for winner
+            if (positionOne == 100)
+            {
+                Console.WriteLine("Player One Wins the game..!!");
+            }
+            else if (positionTwo == 100)
+            {
+                Console.WriteLine("Player Two Wins the game..!!");
+            }
+            Console.WriteLine("Dice rolled :" + loopCount + "times");
             Console.ReadLine();
         }
     }
